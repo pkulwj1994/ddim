@@ -96,6 +96,10 @@ class Diffusion(object):
             self.logvar = posterior_variance.clamp(min=1e-20).log()
 
     def train(self):
+        
+        # fix a random initial sample 
+        
+        
         args, config = self.args, self.config
         tb_logger = self.config.tb_logger
         dataset, test_dataset = get_dataset(args, config)
@@ -186,6 +190,12 @@ class Diffusion(object):
                         os.path.join(self.args.log_path, "ckpt_{}.pth".format(step)),
                     )
                     torch.save(states, os.path.join(self.args.log_path, "ckpt.pth"))
+                    
+                    x = self.sample_image(x, model, last=True)
+                    tvu.save_image(
+                        x, os.path.join(self.args.image_folder, 'imag_{}.png'.format(step)))
+                    
+                    
 
                 data_start = time.time()
 
