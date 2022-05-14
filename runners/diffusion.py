@@ -100,9 +100,9 @@ class Diffusion(object):
         # fix a random initial sample 
         fix_init = torch.randn(
             36,
-            config.data.channels,
-            config.data.image_size,
-            config.data.image_size,
+            self.config.data.channels,
+            self.config.data.image_size,
+            self.config.data.image_size,
             device=self.device,)        
         
         args, config = self.args, self.config
