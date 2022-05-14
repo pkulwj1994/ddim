@@ -16,7 +16,7 @@ from datasets import get_dataset, data_transform, inverse_data_transform
 from functions.ckpt_util import get_ckpt_path
 
 import torchvision.utils as tvu
-
+import matplotlib.pyplot as plt
 
 def torch2hwcuint8(x, clip=False):
     if clip:
@@ -127,6 +127,7 @@ class Diffusion(object):
         else:
             ema_helper = None
 
+        losses = []
         start_epoch, step = 0, 0
         if self.args.resume_training:
             states = torch.load(os.path.join(self.args.log_path, "ckpt.pth"))
@@ -176,6 +177,7 @@ class Diffusion(object):
                 except Exception:
                     pass
                 optimizer.step()
+                losses.append(loss.item())
 
                 if self.config.model.ema:
                     ema_helper.update(model)
@@ -201,6 +203,10 @@ class Diffusion(object):
                     tvu.save_image(
                         x, os.path.join(self.args.log_path, 'imag_{}.png'.format(step)))
                     
+                    
+                    plt.plot(losses)
+                    plt.savefig(os.path.join(self.args.log_path, "losses.png"))
+                    plt.clf()
                     
 
                 data_start = time.time()
