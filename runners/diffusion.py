@@ -98,7 +98,12 @@ class Diffusion(object):
     def train(self):
         
         # fix a random initial sample 
-        
+        fix_init = torch.randn(
+            36,
+            config.data.channels,
+            config.data.image_size,
+            config.data.image_size,
+            device=self.device,)        
         
         args, config = self.args, self.config
         tb_logger = self.config.tb_logger
@@ -191,9 +196,10 @@ class Diffusion(object):
                     )
                     torch.save(states, os.path.join(self.args.log_path, "ckpt.pth"))
                     
-                    x = self.sample_image(x, model, last=True)
+                    model.eval()
+                    x = self.sample_image(fix_init.clone().detach(), model, last=True)
                     tvu.save_image(
-                        x, os.path.join(self.args.image_folder, 'imag_{}.png'.format(step)))
+                        x, os.path.join(self.args.log_path, 'imag_{}.png'.format(step)))
                     
                     
 
