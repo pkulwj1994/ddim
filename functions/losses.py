@@ -32,7 +32,7 @@ def multi_ssm(model,
     loss1 = torch.sum(grad1 * grad1, dim=[-1,-2,-3]) / 2.
     loss2 = torch.sum(vectors * grad2, dim=[-1,-2,-3])
     
-     if keepdim:
+    if keepdim:
         return loss1 + loss2
     else:
         return (loss1+loss2).mean(dim=0)   
