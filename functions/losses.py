@@ -27,7 +27,7 @@ def multi_ssm(model,
     vectors = torch.randn_like(x)
     grad1 = model(x, t.float())
     gradv = torch.sum(grad1 * vectors)
-    grad2 = autograd.grad(gradv, x, create_graph=True)[0]
+    grad2 = torch.autograd.grad(gradv, x, create_graph=True)[0]
     
     loss1 = torch.sum(grad1 * grad1, dim=[-1,-2,-3]) / 2.
     loss2 = torch.sum(vectors * grad2, dim=[-1,-2,-3])
