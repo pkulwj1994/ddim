@@ -153,12 +153,8 @@ class DiffusionTransfer(object):
             data_start = time.time()
             data_time = 0
             for i, ddata in enumerate(dataset):
-                
-                print(i)
-                print(len(ddata))
-                
-                print(ddata['A'].shape)
-                print(ddata['B'].shape)
+
+                x, xx = ddata['A'], ddata['B']
                 
                 n = x.size(0)
                 data_time += time.time() - data_start
