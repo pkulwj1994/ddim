@@ -103,6 +103,7 @@ def parse_args_and_config():
     parser.add_argument('--crop_size', type=int, default=256, help='then crop to this size')
     parser.add_argument('--input_nc', type=int, default=3, help='# of input image channels: 3 for RGB and 1 for grayscale')
     parser.add_argument('--output_nc', type=int, default=3, help='# of output image channels: 3 for RGB and 1 for grayscale')
+    parser.add_argument('--preprocess', type=str, default='resize_and_crop', help='scaling and cropping of images at load time [resize_and_crop | crop | scale_width | scale_width_and_crop | none]')
 
 
     args = parser.parse_args()
