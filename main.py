@@ -87,6 +87,14 @@ def parse_args_and_config():
         help="eta used to control the variances of sigma",
     )
     parser.add_argument("--sequence", action="store_true")
+    
+    ## needed only for facades image tranfer experiments
+    parser.add_argument('--dataset_mode', type=str, default='unaligned', help='chooses how datasets are loaded. [unaligned | aligned | single | colorization]')
+    parser.add_argument('--dataroot', required=True, help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
+    parser.add_argument('--batch_size', type=int, default=1, help='input batch size')
+    parser.add_argument('--serial_batches', action='store_true', help='if true, takes images in order to make batches, otherwise takes them randomly')
+    parser.add_argument('--num_threads', default=4, type=int, help='# threads for loading data')
+
 
     args = parser.parse_args()
     args.log_path = os.path.join(args.exp, "logs", args.doc)
@@ -211,6 +219,7 @@ def dict2namespace(config):
 
 def main():
     args, config = parse_args_and_config()
+    
     logging.info("Writing log file to {}".format(args.log_path))
     logging.info("Exp instance id = {}".format(os.getpid()))
     logging.info("Exp comment = {}".format(args.comment))
