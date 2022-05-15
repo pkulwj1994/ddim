@@ -14,7 +14,7 @@ import numpy as np
 ## modified from junyan zhu pix2pix
 import importlib
 import torch.utils.data
-from data.base_dataset import BaseDataset
+from dataset.base_dataset import BaseDataset
 
 
 def find_dataset_using_name(dataset_name):
