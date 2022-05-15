@@ -157,8 +157,8 @@ class DiffusionTransfer(object):
                 print(i)
                 print(len(ddata))
                 
-                print(ddata[0])
-                print(ddata[1])
+                print(ddata['A'].shape)
+                print(ddata['B'].shape)
                 
                 n = x.size(0)
                 data_time += time.time() - data_start
