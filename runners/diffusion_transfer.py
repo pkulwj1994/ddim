@@ -153,6 +153,13 @@ class DiffusionTransfer(object):
             data_start = time.time()
             data_time = 0
             for i, data in enumerate(train_loader):
+                
+                print(i)
+                print(len(data))
+                
+                print(data[0])
+                print(data[1])
+                
                 n = x.size(0)
                 data_time += time.time() - data_start
                 model.train()
