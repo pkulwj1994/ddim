@@ -62,7 +62,7 @@ def get_beta_schedule(beta_schedule, *, beta_start, beta_end, num_diffusion_time
     return betas
 
 
-class Diffusion(object):
+class DiffusionTransfer(object):
     def __init__(self, args, config, device=None):
         self.args = args
         self.config = config
