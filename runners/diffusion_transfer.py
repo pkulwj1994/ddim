@@ -109,9 +109,12 @@ class DiffusionTransfer(object):
             self.config.data.image_size,
             device=self.device,)        
         
+        opt = TrainOptions().parse()   # get training options
+        dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
+        
         args, config = self.args, self.config
         tb_logger = self.config.tb_logger
-        dataset, test_dataset = get_dataset(args, config)
+        # dataset, test_dataset = get_dataset(args, config)
         train_loader = data.DataLoader(
             dataset,
             batch_size=config.training.batch_size,
