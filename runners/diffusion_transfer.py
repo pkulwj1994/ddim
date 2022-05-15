@@ -111,6 +111,8 @@ class DiffusionTransfer(object):
         
         opt = TrainOptions().parse()   # get training options
         dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
+        dataset_size = len(dataset)    # get the number of images in the dataset.
+        print('The number of training images = %d' % dataset_size)
         
         args, config = self.args, self.config
         tb_logger = self.config.tb_logger
@@ -150,7 +152,7 @@ class DiffusionTransfer(object):
         for epoch in range(start_epoch, self.config.training.n_epochs):
             data_start = time.time()
             data_time = 0
-            for i, (x, y) in enumerate(train_loader):
+            for i, data in enumerate(train_loader):
                 n = x.size(0)
                 data_time += time.time() - data_start
                 model.train()
