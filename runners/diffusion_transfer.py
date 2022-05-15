@@ -109,8 +109,8 @@ class DiffusionTransfer(object):
             self.config.data.image_size,
             device=self.device,)        
         
-        opt = TrainOptions().parse()   # get training options
-        dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
+        # opt = TrainOptions().parse()   # get training options
+        dataset = create_dataset(self.args)  # create a dataset given opt.dataset_mode and other options
         dataset_size = len(dataset)    # get the number of images in the dataset.
         print('The number of training images = %d' % dataset_size)
         
