@@ -8,7 +8,7 @@ data:
     random_flip: true
     rescaled: true
     num_workers: 4
-
+    
 model:
     type: "simple" # options = ['simple', 'multi_ssm']
     in_channels: 3
