@@ -10,6 +10,7 @@ import numpy as np
 import torch.utils.tensorboard as tb
 
 from runners.diffusion import Diffusion
+from runners.diffusion_transfer import DiffusionTransfer
 
 torch.set_printoptions(sci_mode=False)
 
