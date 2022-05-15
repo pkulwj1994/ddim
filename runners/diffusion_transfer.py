@@ -117,12 +117,12 @@ class DiffusionTransfer(object):
         args, config = self.args, self.config
         tb_logger = self.config.tb_logger
         # dataset, test_dataset = get_dataset(args, config)
-        train_loader = data.DataLoader(
-            dataset,
-            batch_size=config.training.batch_size,
-            shuffle=True,
-            num_workers=config.data.num_workers,
-        )
+        # train_loader = data.DataLoader(
+        #     dataset,
+        #     batch_size=config.training.batch_size,
+        #     shuffle=True,
+        #     num_workers=config.data.num_workers,
+        # )
         model = Model(config)
 
         model = model.to(self.device)
@@ -152,13 +152,13 @@ class DiffusionTransfer(object):
         for epoch in range(start_epoch, self.config.training.n_epochs):
             data_start = time.time()
             data_time = 0
-            for i, data in enumerate(train_loader):
+            for i, ddata in enumerate(dataset):
                 
                 print(i)
-                print(len(data))
+                print(len(ddata))
                 
-                print(data[0])
-                print(data[1])
+                print(ddata[0])
+                print(ddata[1])
                 
                 n = x.size(0)
                 data_time += time.time() - data_start
