@@ -200,6 +200,8 @@ class Diffusion(object):
                     
                     model.eval()
                     x = self.sample_image(fix_init.clone().detach(), model, last=True)
+
+                    x = inverse_data_transform(self.config, x)
                     tvu.save_image(
                         x, os.path.join(self.args.log_path, 'imag_{}.png'.format(step)))
                     
